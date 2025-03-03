@@ -33,6 +33,8 @@ jobs:
 
       - name: Debug Environment Variables
         run: env | grep GITHUB
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
