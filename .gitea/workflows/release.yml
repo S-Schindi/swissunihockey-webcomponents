@@ -31,6 +31,9 @@ jobs:
         run: |
           tar -czvf wp-swiss-uniho.tar.gz wp-swiss-uniho/
 
+      - name: Debug Environment Variables
+        run: env | grep GITHUB
+
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
@@ -38,4 +41,3 @@ jobs:
           files: wp-swiss-uniho.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-          GITHUB_REPOSITORY: S-Schindi/modern-swissunihockey
