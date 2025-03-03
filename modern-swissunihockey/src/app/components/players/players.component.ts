@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { AsyncPipe, CommonModule, JsonPipe, NgFor } from '@angular/common';
 import { Observable } from 'rxjs';
 import { PlayersStore } from './players.store';
@@ -37,7 +37,8 @@ import { Player } from './player';
       </ng-template>
     </ng-container>
   `,
-  styles: ``
+  styles: ``,
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PlayersComponent implements OnInit {
   @Input() teamId: string;

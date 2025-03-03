@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Player } from '../components/players/player';
 import { RootTable } from '../components/table/table';
 import { Game } from '../components/games/game';
+import { TeamStaff } from '../components/team-staff/team-staff';
 
 @Injectable({
     providedIn: 'root'
@@ -32,6 +33,10 @@ export class SwissUnihockeyService {
 
     getComingGames(teamId: string): Observable<any> {
         return this.http.get<Game[]>(`${this.apiUrl}/api/teamapi/getcomingteamgames/?teamid=${teamId}&lastgameid=0`, { headers: this.headers });
+    }
+
+    getTeamStaff(teamId: string): Observable<any> {
+        return this.http.get<TeamStaff[]>(`${this.apiUrl}/api/teamapi/initteamstaffadminvc/?teamid=${teamId}`, { headers: this.headers });
     }
 }
 

@@ -6,6 +6,7 @@ import { createApplication } from '@angular/platform-browser';
 import { TableComponent } from './app/components/table/table.component';
 import { PreviousGamesComponent } from './app/components/games/previous-games.component';
 import { UpcomingGamesComponent } from './app/components/games/upcoming-games.component';
+import { TeamStaffComponent } from './app/components/team-staff/team-staff.component';
 
 (async () => {
 
@@ -26,4 +27,7 @@ import { UpcomingGamesComponent } from './app/components/games/upcoming-games.co
 
   const upcomingGamesElement = createCustomElement(UpcomingGamesComponent, { injector: app.injector });
   customElements.define('uniho-upcoming-games', upcomingGamesElement);
+
+  const teamStaffElement = createCustomElement(TeamStaffComponent, { injector: app.injector });
+  customElements.define('uniho-team-staff', teamStaffElement);
 })();

@@ -28,7 +28,7 @@ export class GamesStore extends ComponentStore<PlayersState> {
     readonly loadPreviousGames = this.effect<{ teamId: string }>(trigger$ =>
         trigger$.pipe(
             switchMap(({ teamId }) => {
-                const cachedData = this.cacheService.getCache<Game[]>(this.localStorageKeyPreviousGames);
+                const cachedData = this.cacheService.getCache<Game[]>(`${this.localStorageKeyPreviousGames}_${teamId}`);
                 if (cachedData) {
                     this.patchState({ previousGames: cachedData, error: null });
                     return of(cachedData);
@@ -37,7 +37,7 @@ export class GamesStore extends ComponentStore<PlayersState> {
                     tap({
                         next: (games: Game[]) => {
                             this.patchState({ previousGames: games, error: null });
-                            this.cacheService.setCache<Game[]>(this.localStorageKeyPreviousGames, games);
+                            this.cacheService.setCache<Game[]>(`${this.localStorageKeyPreviousGames}_${teamId}`, games);
                         },
                         error: error => this.patchState({ error })
                     })
@@ -49,7 +49,7 @@ export class GamesStore extends ComponentStore<PlayersState> {
     readonly loadUpcomingGames = this.effect<{ teamId: string }>(trigger$ =>
         trigger$.pipe(
             switchMap(({ teamId }) => {
-                const cachedData = this.cacheService.getCache<Game[]>(this.localStorageKeyUpcomingGames);
+                const cachedData = this.cacheService.getCache<Game[]>(`${this.localStorageKeyUpcomingGames}_${teamId}`);
                 if (cachedData) {
                     this.patchState({ upcomingGames: cachedData, error: null });
                     return of(cachedData);
@@ -58,7 +58,7 @@ export class GamesStore extends ComponentStore<PlayersState> {
                     tap({
                         next: (games: Game[]) => {
                             this.patchState({ upcomingGames: games, error: null });
-                            this.cacheService.setCache<Game[]>(this.localStorageKeyUpcomingGames, games);
+                            this.cacheService.setCache<Game[]>(`${this.localStorageKeyUpcomingGames}_${teamId}`, games);
                         },
                         error: error => this.patchState({ error })
                     })

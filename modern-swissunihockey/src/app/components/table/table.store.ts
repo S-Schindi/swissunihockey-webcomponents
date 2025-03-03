@@ -25,7 +25,7 @@ export class TableStore extends ComponentStore<TableState> {
     readonly loadTable = this.effect<{ itemId: string }>(trigger$ =>
         trigger$.pipe(
             switchMap(({ itemId }) => {
-                const cachedData = this.cacheService.getCache<RootTable>(this.localStorageKey);;
+                const cachedData = this.cacheService.getCache<RootTable>(`${this.localStorageKey}_${itemId}`);;
                 if (cachedData) {
                     this.patchState({ tableRoot: cachedData, error: null });
                     return of(cachedData);
@@ -34,7 +34,7 @@ export class TableStore extends ComponentStore<TableState> {
                     tap({
                         next: (tableRoot: RootTable) => {
                             this.patchState({ tableRoot, error: null });
-                            this.cacheService.setCache<RootTable>(this.localStorageKey, tableRoot);
+                            this.cacheService.setCache<RootTable>(`${this.localStorageKey}_${itemId}`, tableRoot);
                         },
                         error: error => this.patchState({ error })
                     })

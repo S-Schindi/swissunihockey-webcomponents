@@ -25,7 +25,7 @@ export class PlayersStore extends ComponentStore<PlayersState> {
     readonly loadPlayers = this.effect<{ teamId: string }>(trigger$ =>
         trigger$.pipe(
             switchMap(({ teamId }) => {
-                const cachedData = this.cacheService.getCache<Player[]>(this.localStorageKey);
+                const cachedData = this.cacheService.getCache<Player[]>(`${this.localStorageKey}_${teamId}`);
                 if (cachedData) {
                     this.patchState({ players: cachedData, error: null });
                     return of(cachedData);
@@ -34,7 +34,7 @@ export class PlayersStore extends ComponentStore<PlayersState> {
                     tap({
                         next: (players: Player[]) => {
                             this.patchState({ players, error: null });
-                            this.cacheService.setCache<Player[]>(this.localStorageKey, players);
+                            this.cacheService.setCache<Player[]>(`${this.localStorageKey}_${teamId}`, players);
                         },
                         error: error => this.patchState({ error })
                     })

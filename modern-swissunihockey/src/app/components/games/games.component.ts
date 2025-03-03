@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Game } from './game';
 import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
@@ -69,7 +69,8 @@ import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
         </ng-template>
     </ng-container>
   `,
-    styleUrls: ['./games.component.css']
+    styleUrls: ['./games.component.css'],
+    encapsulation: ViewEncapsulation.ShadowDom
 })
 export class GamesComponent {
     @Input() games: Observable<Game[]>;

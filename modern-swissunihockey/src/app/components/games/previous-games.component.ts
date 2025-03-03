@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { GamesStore } from './game.store';
 import { Game } from './game';
 import { Observable } from 'rxjs';
@@ -14,7 +14,8 @@ import { GamesComponent } from './games.component';
       <app-games [games]="previousGames$"></app-games>
     </p>
   `,
-  styles: ``
+  styles: ``,
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PreviousGamesComponent {
   @Input() teamId: string;

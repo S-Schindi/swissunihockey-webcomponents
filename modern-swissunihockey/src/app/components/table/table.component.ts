@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { RootTable } from './table';
 import { Observable } from 'rxjs';
 import { TableStore } from './table.store';
@@ -37,7 +37,8 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
         </ng-template>
     </ng-container>
   `,
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class TableComponent {
   @Input() itemId: string;
