@@ -1,14 +1,29 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import { createCustomElement } from '@angular/elements';
 import { provideHttpClient } from '@angular/common/http';
-import { provideComponentStore } from '@ngrx/component-store';
-import { AppComponent } from './app/app.component';
-import { AppStore } from './app/app.state';
+import { PlayersComponent } from './app/components/players/players.component';
 
-document.addEventListener('DOMContentLoaded', () => {
-  bootstrapApplication(AppComponent, {
+import { createApplication } from '@angular/platform-browser';
+import { TableComponent } from './app/components/table/table.component';
+import { PreviousGamesComponent } from './app/components/games/previous-games.component';
+import { UpcomingGamesComponent } from './app/components/games/upcoming-games.component';
+
+(async () => {
+
+  const app = await createApplication({
     providers: [
       provideHttpClient(),
-      provideComponentStore(AppStore),
-    ]
-  }).catch(err => console.error(err));
-});
+    ],
+  });
+
+  const playerElement = createCustomElement(PlayersComponent, { injector: app.injector });
+  customElements.define('uniho-players', playerElement);
+
+  const tableElement = createCustomElement(TableComponent, { injector: app.injector });
+  customElements.define('uniho-table', tableElement);
+
+  const previousGamesElement = createCustomElement(PreviousGamesComponent, { injector: app.injector });
+  customElements.define('uniho-previous-games', previousGamesElement);
+
+  const upcomingGamesElement = createCustomElement(UpcomingGamesComponent, { injector: app.injector });
+  customElements.define('uniho-upcoming-games', upcomingGamesElement);
+})();

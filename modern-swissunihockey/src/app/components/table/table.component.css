@@ -67,3 +67,12 @@ td.number-column {
         height: 30px;
     }
 }
+
+.center-content {
+    display: flex;
+    align-items: center;
+}
+
+.center-content img {
+    margin-right: 8px;
+}

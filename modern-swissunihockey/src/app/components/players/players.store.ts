@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { SwissUnihockeyService } from '../../services/swissunihockey.service';
-import { of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { Player } from './player';
+import { CacheService } from '../../services/cache.service';
+import { of } from 'rxjs/internal/observable/of';
 
 export interface PlayersState {
     players: Player[];
@@ -13,35 +14,27 @@ export interface PlayersState {
 @Injectable()
 export class PlayersStore extends ComponentStore<PlayersState> {
     private readonly localStorageKey = 'playersCache';
-    private readonly cacheDuration = 10 * 60 * 1000; // 10 minutes in milliseconds
 
-    constructor(private swissUnihockeyService: SwissUnihockeyService) {
+    constructor(private swissUnihockeyService: SwissUnihockeyService, public cacheService: CacheService) {
         super({ players: [], error: null });
-        this.loadCachedPlayers();
     }
 
     readonly players$ = this.select(state => state.players);
     readonly error$ = this.select(state => state.error);
 
-    readonly loadPlayers = this.effect<void>(trigger$ =>
+    readonly loadPlayers = this.effect<{ teamId: string }>(trigger$ =>
         trigger$.pipe(
-            switchMap(() => {
-                const cachedData = localStorage.getItem(this.localStorageKey);
+            switchMap(({ teamId }) => {
+                const cachedData = this.cacheService.getCache<Player[]>(this.localStorageKey);
                 if (cachedData) {
-                    const { players, timestamp } = JSON.parse(cachedData);
-                    const now = new Date().getTime();
-                    if (now - timestamp < this.cacheDuration) {
-                        this.patchState({ players });
-                        return of(players);
-                    } else {
-                        localStorage.removeItem(this.localStorageKey);
-                    }
+                    this.patchState({ players: cachedData, error: null });
+                    return of(cachedData);
                 }
-                return this.swissUnihockeyService.getData().pipe(
+                return this.swissUnihockeyService.getPlayersOfTeam(teamId).pipe(
                     tap({
                         next: (players: Player[]) => {
                             this.patchState({ players, error: null });
-                            this.cachePlayers(players);
+                            this.cacheService.setCache<Player[]>(this.localStorageKey, players);
                         },
                         error: error => this.patchState({ error })
                     })
@@ -49,27 +42,4 @@ export class PlayersStore extends ComponentStore<PlayersState> {
             })
         )
     );
-
-    private loadCachedPlayers() {
-        const cachedData = localStorage.getItem(this.localStorageKey);
-        if (cachedData) {
-            const { players, timestamp } = JSON.parse(cachedData);
-            const now = new Date().getTime();
-            if (now - timestamp < this.cacheDuration) {
-                this.patchState({ players });
-            } else {
-                localStorage.removeItem(this.localStorageKey);
-            }
-        }
-    }
-
-    private cachePlayers(players: Player[]) {
-        const timestamp = new Date().getTime();
-        localStorage.setItem(this.localStorageKey, JSON.stringify({ players, timestamp }));
-    }
-
-    clearCache() {
-        localStorage.removeItem(this.localStorageKey);
-        this.patchState({ players: [] });
-    }
 }

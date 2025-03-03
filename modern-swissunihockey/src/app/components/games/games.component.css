@@ -1,0 +1,185 @@
+.games-table {
+    display: block;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.result-type-container {
+    background-color: #000;
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+
+    span {
+        color: #fff;
+        font-size: 0.75rem;
+    }
+}
+
+.materialCardView {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+    border: medium none !important;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    transition: transform 0.3s ease;
+}
+
+.materialCardView.clickable:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    transform: scale(1.05);
+}
+
+.gameListItem {
+    margin: 0 5px 10px;
+    /* background-color: #fff; */
+    overflow: hidden;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+.leagueContainer {
+    color: #000000;
+    /* background-color: #FFFFFF; */
+    position: relative;
+    padding: 5px 25px;
+    height: 2rem;
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid #F9F9F9;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.league-name {
+    display: block;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 0.83rem;
+    text-transform: uppercase;
+    line-height: 30px;
+}
+
+.game-header {
+    /* background-color: #fff; */
+    display: flex;
+    padding: 8px;
+    gap: 8px;
+    position: relative;
+    align-items: center;
+
+    .list-item {
+        padding-top: 16px;
+    }
+
+    .arena {
+        position: absolute;
+        top: 5px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-weight: bold;
+        font-size: 0.75rem;
+        text-align: center;
+    }
+
+    .team-container {
+        flex: 1 1 0px;
+        width: 0;
+        text-align: center;
+        align-self: flex-start;
+
+        .team-name-container {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            overflow: hidden;
+
+            .team-text {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 1.25rem;
+            }
+
+            .team-sub-text {
+                font-size: 0.83rem;
+                min-height: 16px;
+            }
+        }
+
+        .team-logo-and-name {
+            text-align: center;
+
+            .logo.small {
+                margin-top: 0;
+                height: 48px;
+                width: 48px;
+            }
+        }
+    }
+
+    .result-container {
+        text-align: center;
+
+        .resultPlate {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        .gameTimeContainer {
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.75rem
+        }
+
+        .live-container {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background-color: #548C2F;
+
+            span {
+                color: #fff;
+                font-size: 0.75rem;
+            }
+        }
+    }
+}
+
+.imageMaskContain {
+    overflow: hidden;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-left: auto;
+    margin-right: auto;
+}
