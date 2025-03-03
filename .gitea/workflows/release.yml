@@ -41,15 +41,24 @@ jobs:
           GITHUB_REPOSITORY_OWNER: "S-Schindi"
           GITHUB_REPOSITORY: "S-Schindi/swissunihockey-webcomponents"
 
+      # - name: Create GitHub release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: ${{ github.ref_name }}
+      #     files: wp-swiss-uniho.tar.gz
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+      #     GITHUB_API_URL: "https://api.github.com" # Override Gitea API URL
+      #     GITHUB_SERVER_URL: "https://github.com"
+      #     GITHUB_ACTOR: "S-Schindi"
+      #     GITHUB_REPOSITORY_OWNER: "S-Schindi"
+      #     GITHUB_REPOSITORY: "S-Schindi/swissunihockey-webcomponents"
+
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          files: wp-swiss-uniho.tar.gz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-          GITHUB_API_URL: "https://api.github.com" # Override Gitea API URL
-          GITHUB_SERVER_URL: "https://github.com"
-          GITHUB_ACTOR: "S-Schindi"
-          GITHUB_REPOSITORY_OWNER: "S-Schindi"
-          GITHUB_REPOSITORY: "S-Schindi/swissunihockey-webcomponents"
+        run: |
+          env -i bash -c '
+            export GITHUB_API_URL="https://api.github.com"
+            export GITHUB_SERVER_URL="https://github.com"
+            export GITHUB_TOKEN="${{ secrets.GITHUBTOKEN }}"
+            gh release create "${{ github.ref_name }}" wp-swiss-uniho.tar.gz --repo S-Schindi/swissunihockey-webcomponents
+          '
