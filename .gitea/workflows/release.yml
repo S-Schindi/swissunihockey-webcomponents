@@ -38,3 +38,4 @@ jobs:
           files: wp-swiss-uniho.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+          GITHUB_REPOSITORY: S-Schindi/modern-swissunihockey
