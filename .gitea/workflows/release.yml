@@ -56,7 +56,7 @@ jobs:
 
       - name: Install GitHub CLI
         run: |
-          curl -fsSL https://cli.github.com/install.sh | bash
+          sudo apt install gh
 
       - name: Create GitHub release using gh CLI
         run: |
