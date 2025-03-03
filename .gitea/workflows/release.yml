@@ -1,0 +1,40 @@
+name: Build & Release Angular App
+
+on:
+  push:
+    tags:
+      - "v*.*.*" # Runs on versioned tags (e.g., v1.0.0)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+
+      - name: Install dependencies
+        run: |
+          cd modern-swissunihockey
+          npm ci
+
+      - name: Build Angular application
+        run: |
+          cd modern-swissunihockey
+          npm run build
+
+      - name: Zip the output folder
+        run: |
+          tar -czvf wp-swiss-uniho.tar.gz wp-swiss-uniho/
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: wp-swiss-uniho.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
