@@ -42,6 +42,4 @@ export interface RootTable {
     TableExplanationText: string;
     EmptyStateText: string | null;
     AllRowsFetched: boolean;
-    LeagueStatistics: any;
-    SelectableTableTypes: any;
 }

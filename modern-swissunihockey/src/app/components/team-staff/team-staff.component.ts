@@ -45,6 +45,7 @@ import { TeamStaff } from './team-staff';
     gap: 16px;
     margin-top: 16px;
     justify-content: center;
+    flex-wrap: wrap;
 
     .team-staff:hover {
       transform: scale(1.05);

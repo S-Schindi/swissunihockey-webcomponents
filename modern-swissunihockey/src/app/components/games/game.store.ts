@@ -9,6 +9,7 @@ import { Game } from './game';
 export interface PlayersState {
     previousGames: Game[];
     upcomingGames: Game[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error: any;
 }
 

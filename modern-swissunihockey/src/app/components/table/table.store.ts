@@ -8,6 +8,7 @@ import { RootTable } from './table';
 
 export interface TableState {
     tableRoot: RootTable;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error: any;
 }
 

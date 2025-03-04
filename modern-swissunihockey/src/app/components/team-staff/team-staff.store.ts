@@ -8,6 +8,7 @@ import { TeamStaff } from './team-staff';
 
 export interface TeamStaffState {
     teamStaff: TeamStaff[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error: any;
 }
 

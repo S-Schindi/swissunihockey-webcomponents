@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { AsyncPipe, CommonModule, JsonPipe, NgFor } from '@angular/common';
+import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { Observable } from 'rxjs';
 import { PlayersStore } from './players.store';
 import { Player } from './player';

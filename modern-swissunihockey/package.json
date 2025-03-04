@@ -7,7 +7,8 @@
     "build": "ng build --configuration=production --output-path=../wp-swiss-uniho/build --output-hashing=none --single-bundle",
     "build:dev": "ng build --configuration=development --output-path=../wp-swiss-uniho/build --output-hashing=none --single-bundle",
     "release": "npm run build:dev && cp -r ../wp-swiss-uniho ../wp-content/plugins/",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +28,9 @@
     "@angular-devkit/build-angular": "^19.2.0",
     "@angular/cli": "^19.2.0",
     "@angular/compiler-cli": "^19.2.0",
-    "typescript": "~5.7.2"
+    "angular-eslint": "19.2.0",
+    "eslint": "^9.21.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "8.25.0"
   }
 }

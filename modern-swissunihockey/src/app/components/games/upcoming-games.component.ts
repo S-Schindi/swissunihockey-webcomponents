@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { GamesStore } from './game.store';
 import { Game } from './game';
 import { Observable } from 'rxjs';
@@ -17,7 +17,7 @@ import { GamesComponent } from './games.component';
   styles: ``,
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class UpcomingGamesComponent {
+export class UpcomingGamesComponent implements OnInit {
   @Input() teamId: string;
 
   upcomingGames$: Observable<Game[]>;
