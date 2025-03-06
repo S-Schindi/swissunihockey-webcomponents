@@ -34,7 +34,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
                                     <!-- TODO: Implement different views based on game.status -->
                                     <div class="resultPlate">
                                         <span *ngIf="game.GameStatusID !== 1">{{game.HomeTeamScore}}-{{game.AwayTeamScore}}</span>
-                                        <span *ngIf="game.GameStatusID === 1">{{getTimestamp(game.GameTime) | date:'HH:mm'}}</span>
+                                        <span *ngIf="game.GameStatusID === 1" [ngClass]="{'cancelled': game.Cancelled === true}">{{getTimestamp(game.GameTime) | date:'HH:mm'}}</span>
                                     </div>
                                     <div class="gameTimeContainer">
                                         <span>{{getTimestamp(game.GameTime) | date}}</span>
@@ -47,6 +47,9 @@ import { AsyncPipe, CommonModule } from '@angular/common';
                                     </div>
                                     <div *ngIf="game.GameStatusID === 2"  class="live-container">
                                         <span>LIVE</span>             
+                                    </div>
+                                    <div *ngIf="game.Cancelled" class="cancelled-container">
+                                        <span>Cancelled</span>
                                     </div>
                                 </div>  
                                 <div class="team-container">

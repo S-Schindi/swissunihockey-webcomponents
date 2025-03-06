@@ -67,4 +67,25 @@ export class GamesStore extends ComponentStore<PlayersState> {
             })
         )
     );
+
+    readonly loadUpcomingClubGames = this.effect<{ clubId: string }>(trigger$ =>
+        trigger$.pipe(
+            switchMap(({ clubId }) => {
+                const cachedData = this.cacheService.getCache<Game[]>(`${this.localStorageKeyUpcomingGames}_${clubId}`);
+                if (cachedData) {
+                    this.patchState({ upcomingGames: cachedData, error: null });
+                    return of(cachedData);
+                }
+                return this.swissUnihockeyService.getComingClubGames(clubId).pipe(
+                    tap({
+                        next: (games: Game[]) => {
+                            this.patchState({ upcomingGames: games, error: null });
+                            this.cacheService.setCache<Game[]>(`${this.localStorageKeyUpcomingGames}_${clubId}`, games);
+                        },
+                        error: error => this.patchState({ error })
+                    })
+                );
+            })
+        )
+    );
 }

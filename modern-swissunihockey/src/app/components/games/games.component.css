@@ -154,6 +154,11 @@ li {
             text-transform: uppercase;
             font-weight: bold;
             font-size: 20px;
+
+            >.cancelled {
+                text-decoration: line-through;
+                text-decoration-color: red;
+            }
         }
 
         .gameTimeContainer {
@@ -167,6 +172,18 @@ li {
             padding: 2px 8px;
             border-radius: 4px;
             background-color: #548C2F;
+
+            span {
+                color: #fff;
+                font-size: 12px;
+            }
+        }
+
+        .cancelled-container {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background-color: #FA2525;
 
             span {
                 color: #fff;

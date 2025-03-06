@@ -35,6 +35,10 @@ export class SwissUnihockeyService {
         return this.http.get<Game[]>(`${this.apiUrl}/api/teamapi/getcomingteamgames/?teamid=${teamId}&lastgameid=0`, { headers: this.headers });
     }
 
+    getComingClubGames(teamId: string): Observable<Game[]> {
+        return this.http.get<Game[]>(`${this.apiUrl}/api/clubapi/getcomingclubgames/?clubid=${teamId}&lastgameid=0`, { headers: this.headers });
+    }
+
     getTeamStaff(teamId: string): Observable<TeamStaff[]> {
         return this.http.get<TeamStaff[]>(`${this.apiUrl}/api/teamapi/initteamstaffadminvc/?teamid=${teamId}`, { headers: this.headers });
     }

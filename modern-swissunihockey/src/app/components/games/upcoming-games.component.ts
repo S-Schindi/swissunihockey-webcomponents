@@ -19,6 +19,7 @@ import { GamesComponent } from './games.component';
 })
 export class UpcomingGamesComponent implements OnInit {
   @Input() teamId: string;
+  @Input() clubId: string;
 
   upcomingGames$: Observable<Game[]>;
 
@@ -27,6 +28,10 @@ export class UpcomingGamesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gameStore.loadUpcomingGames({ teamId: this.teamId });
+    if (this.teamId) {
+      this.gameStore.loadUpcomingGames({ teamId: this.teamId });
+    } else {
+      this.gameStore.loadUpcomingClubGames({ clubId: this.clubId });
+    }
   }
 }
